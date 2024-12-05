@@ -9,7 +9,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss']
+  styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit, OnDestroy {
   user: any = null;
@@ -28,7 +28,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.userState.getUserData().subscribe(userData => {
+      this.userState.getUserData().subscribe((userData) => {
         this.user = userData;
         console.log(userData);
         if (userData?.FavoriteMovies?.length) {
@@ -42,7 +42,7 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   loadFavoriteMovies(): void {
@@ -54,9 +54,9 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.snackBar.open('Error loading favorite movies', 'OK', {
-          duration: 2000
+          duration: 2000,
         });
-      }
+      },
     });
   }
 
@@ -69,33 +69,32 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         this.snackBar.open('Error loading to watch movies', 'OK', {
-          duration: 2000
+          duration: 2000,
         });
-      }
+      },
     });
   }
   updateProfile(updatedData: any): void {
-    this.fetchApiData.updateUser(updatedData).subscribe({
+    this.fetchApiData.updateUser(this.user).subscribe({
       next: (response) => {
-        this.userState.updateUserData(response);
+        this.user = response;
+        // this.userState.updateUserData(response);
         this.snackBar.open('Profile updated successfully', 'OK', {
-          duration: 2000
+          duration: 2000,
         });
       },
       error: (error) => {
+        console.log(error);
         this.snackBar.open('Failed to update profile', 'OK', {
-          duration: 2000
+          duration: 2000,
         });
-      }
+      },
     });
   }
 
-
-
   saveChanges() {
-    
     this.updateProfile(this.user);
-    this.editMode = false
+    this.editMode = false;
   }
 
   toggleEditMode() {

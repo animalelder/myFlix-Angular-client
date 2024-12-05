@@ -8,8 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import {ReactiveFormsModule} from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Angular Material Components
 import { MatButtonModule } from '@angular/material/button';
@@ -85,7 +84,7 @@ const appRoutes: Routes = [
   providers: [
     // provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     UserStateService,
     StorageService,
     FetchApiDataService,
